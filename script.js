@@ -1,45 +1,30 @@
-(() => {
-  const btn = document.querySelector("[data-form-btn]");
+// Inmediatly invoked function expression IIFE
 
-  const createTask = (evento) => {
-    evento.preventDefault();
-    const input = document.querySelector("[data-form-input]");
-    const value = input.value;
-    const list = document.querySelector("[data-list]");
-    const task = document.createElement("li");
-    task.classList.add("card");
-    input.value = "";
-    const taskContent = document.createElement("div");
-    const titleTask = document.createElement("span");
-    titleTask.classList.add("task");
-    titleTask.innerText = value;
-    taskContent.appendChild(checkComplete());
-    taskContent.appendChild(titleTask);
-    const content = `
-  <i class="fas fa-trash-alt trashIcon icon"></i>`;
-    //   task.innerHTML = content;
-    task.appendChild(taskContent);
-    list.appendChild(task);
-    console.log(content);
-  };
-  console.log(btn);
+import checkComplete from "./components/checkComplete.js";
+import deleteIcon from "./components/deleteIcon.js";
 
-  //Arrow function o funcioens anonimas
-  btn.addEventListener("click", createTask);
-  //listener
+const btn = document.querySelector("[data-form-btn]");
 
-  const checkComplete = () => {
-    const i = document.createElement("i");
-    i.classList.add("far", "fa-check-square", "icon");
-    i.addEventListener("click", completeTask);
-    return i;
-  };
-  // Inmediatly invoked function expression IIFE
-  const completeTask = (evento) => {
-    console.log(evento.target);
-    const element = evento.target;
-    element.classList.toggle("fas");
-    element.classList.toggle("completeIcon");
-    element.classList.toggle("far");
-  };
-})();
+const createTask = (evento) => {
+  evento.preventDefault();
+  const input = document.querySelector("[data-form-input]");
+  const value = input.value;
+  const list = document.querySelector("[data-list]");
+  const task = document.createElement("li");
+  task.classList.add("card");
+  input.value = "";
+  const taskContent = document.createElement("div");
+  const titleTask = document.createElement("span");
+  titleTask.classList.add("task");
+  titleTask.innerText = value;
+  taskContent.appendChild(checkComplete());
+  taskContent.appendChild(titleTask);
+  //   taskContent.appendChild(deleteIcon());
+  //   task.innerHTML = content;
+  task.appendChild(taskContent);
+  task.appendChild(deleteIcon());
+  list.appendChild(task);
+};
+
+//Arrow function o funcioens anonimas
+btn.addEventListener("click", createTask);
